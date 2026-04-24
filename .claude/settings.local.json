@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(python -c \"from app import create_app; app = create_app\\(\\); print\\('✅ Flask app created successfully'\\)\")",
+      "Bash(python -c \"from app import create_app; app = create_app\\(\\); print\\('Flask app created successfully'\\)\")",
+      "Bash(npm run:*)",
+      "Bash(cmd /c \"dir \\\\\"C:\\\\Program Files\\\\\" /b 2>nul\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}

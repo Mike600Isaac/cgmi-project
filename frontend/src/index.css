@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+/* ── Container width override ── */
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl {
+  max-width: 1400px !important;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97e;
+  --dark-navy: #0d1b2a;
+  --navy: #1a2d4a;
+  --deep-blue: #1e3a5f;
+  --section-bg: #f4f6f9;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #2c2c2c;
+  background: #fff;
+}
+
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+
+h1, h2, h3, h4, .font-display { font-family: 'Cinzel', serif; }
+
+.text-gold { color: var(--gold) !important; }
+
+/* ── Hero (used on inner pages; Home uses HeroCarousel) ── */
+.hero-section {
+  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--deep-blue) 60%, #2a1a0a 100%);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Navbar top strip ── */
+.navbar-ministry {
+  background: transparent !important;
+}
+
+/* ── Section ── */
+.section-pad { padding: 80px 0; }
+.section-bg { background: var(--section-bg); }
+
+.gold-divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  margin: 12px auto 24px;
+}
+
+/* ── Cards ── */
+.ministry-card {
+  border: none; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  transition: transform .3s cubic-bezier(.25,.8,.25,1), box-shadow .3s cubic-bezier(.25,.8,.25,1);
+  background: #fff;
+}
+.ministry-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.14); }
+
+/* Skeleton loading pulse */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+}
+
+/* ── Navbar ── */
+.navbar-ministry {
+  background: rgba(13,27,42,.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201,168,76,.25);
+}
+.navbar-ministry .nav-link { color: rgba(255,255,255,.85) !important; font-weight: 500; transition: color .2s; }
+.navbar-ministry .nav-link:hover,
+.navbar-ministry .nav-link.active { color: var(--gold) !important; }
+.navbar-brand-text { font-family: 'Cinzel', serif; color: var(--gold) !important; letter-spacing: 1px; }
+.navbar-ministry .dropdown-menu { background: var(--dark-navy); border: 1px solid rgba(201,168,76,.2); }
+.navbar-ministry .dropdown-item { color: rgba(255,255,255,.8); }
+.navbar-ministry .dropdown-item:hover { background: rgba(201,168,76,.15); color: var(--gold); }
+
+/* ── Buttons ── */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--dark-navy); border: none; font-weight: 700; border-radius: 8px;
+  transition: opacity .2s, transform .2s;
+}
+.btn-gold:hover { opacity: .88; transform: translateY(-1px); color: var(--dark-navy); }
+.btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; border-radius: 8px; transition: all .2s; }
+.btn-outline-gold:hover { background: var(--gold); color: var(--dark-navy); }
+
+/* ── Progress ── */
+.course-progress .progress { height: 10px; border-radius: 10px; }
+.course-progress .progress-bar { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+
+/* ── Media thumbnails ── */
+.media-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; }
+
+/* ── Footer ── */
+.footer-ministry { background: var(--dark-navy); color: rgba(255,255,255,.75); padding: 60px 0 24px; }
+.footer-ministry a { color: rgba(255,255,255,.65); text-decoration: none; }
+.footer-ministry a:hover { color: var(--gold); }
+
+/* ── Sidebar ── */
+.sidebar { background: var(--dark-navy); color: white; min-width: 220px; }
+.sidebar .nav-link { color: rgba(255,255,255,.7); padding: 10px 16px; border-radius: 8px; margin: 2px 6px; transition: all .2s; }
+.sidebar .nav-link:hover, .sidebar .nav-link.active { background: rgba(201,168,76,.15); color: var(--gold); }
+
+/* ── Lesson ── */
+.lesson-sidebar { position: sticky; top: 70px; max-height: calc(100vh - 80px); overflow-y: auto; }
+
+/* ── Animations ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .6s ease both; }
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(201,168,76,0); }
+}
+
+/* Smooth card hover lift (used as fallback without framer-motion) */
+.card-hover {
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+}
+
+/* Gold shimmer button effect */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+}
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-gold:hover::after { left: 150%; }
+
+/* Smooth focus ring */
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.2rem rgba(201,168,76,.2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Page fade transition utility */
+.page-enter { opacity: 0; transform: translateY(16px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: opacity 0.35s ease, transform 0.35s ease; }
+.page-exit { opacity: 1; }
+.page-exit-active { opacity: 0; transition: opacity 0.2s ease; }
+
+/* ── Give Today scrolling ticker ── */
+.give-ticker { white-space: nowrap; }
+.give-ticker-track {
+  display: inline-flex;
+  animation: ticker-scroll 35s linear infinite;
+}
+.give-ticker-track:hover { animation-play-state: paused; }
+.give-ticker-group { display: inline-flex; align-items: center; }
+.give-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(201,168,76,0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 1.5rem;
+  font-family: 'Cinzel', serif;
+}
+.give-ticker-dot {
+  color: var(--gold);
+  margin-left: 1.5rem;
+  font-size: 0.7rem;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@media (max-width: 768px) {
+  .hero-section { min-height: 70vh; }
+  .section-pad { padding: 48px 0; }
+  .sidebar { min-width: 100%; }
+}

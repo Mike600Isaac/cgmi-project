@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ministry of the Word — Coming Soon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --dark-navy: #0d1b2a;
+      --deep-blue: #1e3a5f;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Lato', sans-serif; background: var(--dark-navy); color: white; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: rgba(13,27,42,0.97);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      padding: 14px 0;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .brand { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.2rem; text-decoration: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; margin: 0 14px; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 60%, #2a1a0a 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 20px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 750px; }
+    .hero-icon { font-size: 4rem; color: var(--gold); margin-bottom: 20px; display: block; }
+    .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 20px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 40px; line-height: 1.7; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold), #e8c97e); color: #0d1b2a; border: none; padding: 14px 40px; font-weight: 700; font-size: 1rem; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s, transform 0.2s; margin: 6px; }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-outline { border: 2px solid var(--gold); color: var(--gold); background: transparent; padding: 12px 38px; font-weight: 600; font-size: 1rem; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; margin: 6px; }
+    .btn-outline:hover { background: var(--gold); color: #0d1b2a; }
+
+    /* ── VERSE BANNER ── */
+    .verse-banner { background: var(--gold); padding: 16px; text-align: center; }
+    .verse-banner p { color: var(--dark-navy); font-family: 'Cinzel', serif; font-weight: 600; margin: 0; font-size: 0.95rem; }
+
+    /* ── FEATURES ── */
+    .features { background: #f4f6f9; padding: 80px 20px; color: #2c2c2c; }
+    .features h2 { font-family: 'Cinzel', serif; text-align: center; font-size: 2rem; margin-bottom: 10px; }
+    .gold-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), #e8c97e); border-radius: 2px; margin: 0 auto 50px; }
+    .card { background: white; border-radius: 16px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; height: 100%; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.14); }
+    .card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 16px; display: block; }
+    .card h4 { font-weight: 700; margin-bottom: 10px; }
+    .card p { color: #6c757d; font-size: 0.95rem; margin: 0; }
+
+    /* ── COURSES ── */
+    .courses { background: linear-gradient(135deg, #0d1b2a, #1e3a5f); padding: 80px 20px; color: white; text-align: center; }
+    .courses h2 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 10px; }
+    .courses p.sub { color: rgba(255,255,255,0.7); margin-bottom: 50px; }
+    .course-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 16px; padding: 32px 24px; height: 100%; transition: all 0.3s; }
+    .course-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+    .course-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 16px; display: block; }
+    .course-card h4 { font-weight: 700; margin-bottom: 10px; }
+    .course-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 20px; }
+    .badge-free { background: #198754; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .badge-paid { background: #0d6efd; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .badge-enroll { background: #6f42c1; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+    /* ── CTA ── */
+    .cta { background: #f4f6f9; padding: 80px 20px; text-align: center; color: #2c2c2c; }
+    .cta h2 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 16px; }
+    .cta p { color: #6c757d; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer { background: #0d1b2a; color: rgba(255,255,255,0.7); padding: 50px 20px 24px; }
+    .footer-brand { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .footer-links h6 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 14px; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 8px; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-divider { border-color: rgba(201,168,76,0.2); margin: 30px 0 20px; }
+    .social a { color: rgba(255,255,255,0.6); font-size: 1.3rem; margin-right: 16px; text-decoration: none; transition: color 0.2s; }
+    .social a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="brand d-flex align-items-center gap-2" href="#">
+        <i class="bi bi-brightness-high-fill"></i>
+        Ministry of the Word
+      </a>
+      <div class="nav-links d-none d-md-block">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Media</a>
+        <a href="#">Gallery</a>
+        <a href="#">Courses</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="#" class="btn-outline" style="padding: 8px 20px; font-size: 0.85rem;">Login</a>
+        <a href="#" class="btn-gold" style="padding: 8px 20px; font-size: 0.85rem;">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <i class="bi bi-brightness-high-fill hero-icon"></i>
+      <h1>Welcome to the Ministry of the Word</h1>
+      <p>Transforming lives through the power of God's Word. Winning souls, making disciples and raising kingdom builders for Christ.</p>
+      <a href="#courses" class="btn-gold"><i class="bi bi-mortarboard-fill me-2"></i>Start Learning</a>
+      <a href="#media" class="btn-outline"><i class="bi bi-play-circle me-2"></i>Watch Messages</a>
+    </div>
+  </section>
+
+  <!-- VERSE BANNER -->
+  <div class="verse-banner">
+    <p><i class="bi bi-quote me-2"></i>"Go therefore and make disciples of all nations..." — Matthew 28:19</p>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2>What We Do</h2>
+      <div class="gold-line"></div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card">
+            <i class="bi bi-person-heart"></i>
+            <h4>Soul Winning</h4>
+            <p>Reaching the lost with the saving message of Jesus Christ.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <i class="bi bi-mortarboard"></i>
+            <h4>Discipleship</h4>
+            <p>Training believers to be strong, mature followers of Christ.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <i class="bi bi-globe2"></i>
+            <h4>Missions</h4>
+            <p>Taking the Gospel to the ends of the earth through missions.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <i class="bi bi-people-fill"></i>
+            <h4>Community</h4>
+            <p>Building a loving community of believers united in purpose.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses" id="courses">
+    <div class="container">
+      <h2>Training Programs</h2>
+      <div class="gold-line" style="background: linear-gradient(90deg, var(--gold), #e8c97e);"></div>
+      <p class="sub">Grow from a new convert to a mature, equipped believer in Christ</p>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="course-card">
+            <i class="bi bi-star-fill"></i>
+            <span class="badge-free">FREE</span>
+            <h4 class="mt-3">Convert Class</h4>
+            <p>Begin your journey with Christ. This course lays the solid foundation every new believer needs.</p>
+            <a href="#" class="btn-gold" style="font-size:0.9rem; padding:10px 28px;">Enroll Free</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <i class="bi bi-globe2"></i>
+            <span class="badge-paid">PAID</span>
+            <h4 class="mt-3">Missionary Training</h4>
+            <p>Equip yourself to take the Gospel to the nations with power, strategy and fire.</p>
+            <a href="#" class="btn-gold" style="font-size:0.9rem; padding:10px 28px;">View Course</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <i class="bi bi-people-fill"></i>
+            <span class="badge-enroll">ENROLLMENT</span>
+            <h4 class="mt-3">Sons & Daughters</h4>
+            <p>Deep discipleship and mentorship for those hungry for more of God.</p>
+            <a href="#" class="btn-gold" style="font-size:0.9rem; padding:10px 28px;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE CTA -->
+  <section class="cta">
+    <div class="container">
+      <i class="bi bi-heart-fill" style="font-size:3rem; color:var(--gold); display:block; margin-bottom:16px;"></i>
+      <h2>Support the Ministry</h2>
+      <p>Your generous donations help us reach more souls, produce more content and expand God's kingdom.</p>
+      <a href="#" class="btn-gold"><i class="bi bi-gift-fill me-2"></i>Give Today</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <i class="bi bi-brightness-high-fill"></i>
+            Ministry of the Word
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:16px;">Transforming lives through the power of God's Word.</p>
+          <div class="social">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-youtube"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h6>Ministry</h6>
+          <a href="#">About Ministry</a>
+          <a href="#">About Evangelist</a>
+          <a href="#">Projects</a>
+          <a href="#">Gallery</a>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h6>Media</h6>
+          <a href="#">Messages</a>
+          <a href="#">Videos</a>
+          <a href="#">Audio</a>
+          <a href="#">Books/PDFs</a>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h6>Training</h6>
+          <a href="#">Convert Class</a>
+          <a href="#">Missionary</a>
+          <a href="#">Discipleship</a>
+          <a href="#">All Courses</a>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h6>Connect</h6>
+          <a href="#">Contact Ministry</a>
+          <a href="#">Contact Evangelist</a>
+          <a href="#">Register</a>
+          <a href="#">Login</a>
+        </div>
+      </div>
+      <hr class="footer-divider" />
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p style="font-size:0.85rem; margin:0;">© 2025 Ministry of the Word. All rights reserved.</p>
+        <p style="font-size:0.85rem; margin:0; color:var(--gold);">
+          <i class="bi bi-book-half me-1"></i>"Go therefore and make disciples..." — Matt 28:19
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
