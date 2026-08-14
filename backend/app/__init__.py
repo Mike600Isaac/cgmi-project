@@ -11,7 +11,21 @@ def create_app(config_name: str = "default") -> Flask:
     # Init extensions
     db.init_app(app)
     jwt.init_app(app)
-    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+
+    # CORS: allow "*" (dev) or a comma-separated allow-list (production)
+    _origins = app.config.get("CORS_ORIGINS", "*")
+    origins = "*" if _origins.strip() == "*" else [
+        o.strip() for o in _origins.split(",") if o.strip()
+    ]
+    cors.init_app(app, resources={r"/api/*": {"origins": origins}})
+
+    # Warn loudly if a production build is left wide open.
+    if not app.config.get("DEBUG") and origins == "*":
+        app.logger.warning(
+            "CORS is set to '*' in a non-debug build. Set CORS_ORIGINS to "
+            "your frontend domain before going live."
+        )
+
     migrate.init_app(app, db)
     mail.init_app(app)
 

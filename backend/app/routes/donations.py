@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from ..extensions import db
 from ..models import Donation, User
+from ..utils.paystack import verify_transaction, PaystackError
 
 donations_bp = Blueprint("donations", __name__, url_prefix="/api/donations")
 
@@ -12,32 +13,44 @@ def create_donation():
     user_id = None
     try:
         verify_jwt_in_request(optional=True)
-        user_id = int(get_jwt_identity())
+        identity = get_jwt_identity()
+        user_id = int(identity) if identity else None
     except Exception:
-        pass
+        user_id = None
 
-    data = request.get_json()
-    amount = data.get("amount")
-    if not amount or float(amount) <= 0:
-        return jsonify({"error": "Valid donation amount required"}), 400
-
-    user = User.query.get(user_id) if user_id else None
+    data = request.get_json() or {}
     payment_ref = data.get("payment_ref")
 
-    # Prevent duplicate submissions with the same payment reference
-    if payment_ref and Donation.query.filter_by(payment_ref=payment_ref).first():
+    # A payment reference is mandatory — every donation must be a real,
+    # verifiable Paystack transaction. No reference => no trust.
+    if not payment_ref:
+        return jsonify({"error": "Missing payment reference"}), 400
+
+    # Idempotency: never record the same transaction twice.
+    if Donation.query.filter_by(payment_ref=payment_ref).first():
         return jsonify({"error": "Donation already recorded"}), 409
+
+    # Verify the payment with Paystack using the secret key. We trust the
+    # gateway's amount/currency, NOT whatever the browser claims it paid.
+    try:
+        verified = verify_transaction(payment_ref)
+    except PaystackError as exc:
+        return jsonify({"error": f"Payment verification failed: {exc}"}), 402
+
+    user = User.query.get(user_id) if user_id else None
 
     donation = Donation(
         user_id=user_id,
         donor_name=data.get("donor_name") or (
             f"{user.first_name} {user.last_name}" if user else "Anonymous"
         ),
-        donor_email=data.get("donor_email") or (user.email if user else None),
-        amount=float(amount),
-        currency=data.get("currency", "NGN"),
+        donor_email=verified["email"] or data.get("donor_email") or (
+            user.email if user else None
+        ),
+        amount=verified["amount"],          # authoritative amount from Paystack
+        currency=verified["currency"],      # authoritative currency from Paystack
         payment_method=data.get("payment_method", "paystack"),
-        payment_ref=payment_ref,
+        payment_ref=verified["reference"] or payment_ref,
         message=data.get("message", ""),
         is_anonymous=data.get("is_anonymous", False),
         status="completed",

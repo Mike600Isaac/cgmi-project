@@ -1,0 +1,30 @@
+# ─── Secrets / env ─────────────────────────────
+.env
+*.env
+!*.env.example
+backend/.env
+frontend/.env
+
+# ─── Python ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+backend/venv/
+backend/instance/
+.pytest_cache/
+
+# ─── Node / frontend ───────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+.pnpm-store/
+
+# ─── Uploads (user-generated files) ────────────
+backend/uploads/
+
+# ─── OS / editor ───────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

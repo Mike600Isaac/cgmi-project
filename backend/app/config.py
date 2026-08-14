@@ -19,7 +19,8 @@ class Config:
     DB_USER = os.getenv("DB_USER", "root")
     DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 
-    SQLALCHEMY_DATABASE_URI = (
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL or (
         f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -43,6 +44,15 @@ class Config:
     MAIL_DEFAULT_SENDER = os.getenv("MAIL_USERNAME")
 
     FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+
+    # Comma-separated list of origins allowed to call the API (CORS).
+    # Defaults to "*" for easy local dev — LOCK THIS DOWN in production by
+    # setting CORS_ORIGINS to your real frontend domain(s).
+    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*")
+
+    # Paystack payment gateway
+    PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY", "")
+    PAYSTACK_PUBLIC_KEY = os.getenv("PAYSTACK_PUBLIC_KEY", "")
 
 
 class DevelopmentConfig(Config):

@@ -40,7 +40,7 @@ export default function ContactMinistry() {
             <div className="col-lg-4">
               <h3 className="fw-bold mb-4">Get In Touch</h3>
               {[
-                { icon: 'bi-envelope-fill', title: 'Email', text: 'info@ministryoftheword.org' },
+                { icon: 'bi-envelope-fill', title: 'Email', text: 'commandersmission@gmail.com' },
                 { icon: 'bi-telephone-fill', title: 'Phone', text: '+1 (234) 567-8900' },
                 { icon: 'bi-geo-alt-fill', title: 'Address', text: '123 Kingdom Avenue, City, Country' },
                 { icon: 'bi-clock-fill', title: 'Office Hours', text: 'Mon–Fri: 9am – 5pm' },
