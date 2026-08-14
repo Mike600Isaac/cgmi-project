@@ -42,8 +42,8 @@ export default function ContactMinistry() {
               {[
                 { icon: 'bi-envelope-fill', title: 'Email', text: 'commandersmission@gmail.com' },
                 { icon: 'bi-telephone-fill', title: 'Phone', text: '+1 (234) 567-8900' },
-                { icon: 'bi-geo-alt-fill', title: 'Address', text: '123 Kingdom Avenue, City, Country' },
-                { icon: 'bi-clock-fill', title: 'Office Hours', text: 'Mon–Fri: 9am – 5pm' },
+                { icon: 'bi-geo-alt-fill', title: 'Address', text: 'Back of Timber Shade, Pegi, Kuje, FCT' },
+                { icon: 'bi-clock-fill', title: 'Office Hours', text: 'Mon–Fri: 8am – 6pm' },
               ].map((item, i) => (
                 <div key={i} className="d-flex gap-3 mb-4">
                   <div className="flex-shrink-0">
