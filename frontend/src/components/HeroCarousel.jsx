@@ -18,8 +18,8 @@ const SLIDES = [
   },
   {
     id: 1,
-    bg: 'linear-gradient(135deg, #0a1a0f 0%, #14532d 55%, #052e16 100%)',
-    accent: '#4ade80',
+    bg: 'linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 55%, #0f2340 100%)',
+    accent: '#c9a84c',
     icon: 'bi-person-heart',
     badge: 'Soul Winning',
     title: 'Reaching the Lost with the Gospel',
@@ -31,8 +31,8 @@ const SLIDES = [
   },
   {
     id: 2,
-    bg: 'linear-gradient(135deg, #1a0a2e 0%, #4c1d95 55%, #2e1065 100%)',
-    accent: '#a78bfa',
+    bg: 'linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 55%, #0f2340 100%)',
+    accent: '#c9a84c',
     icon: 'bi-mortarboard-fill',
     badge: 'Training & Discipleship',
     title: 'Equipping Believers for Kingdom Impact',
@@ -44,8 +44,8 @@ const SLIDES = [
   },
   {
     id: 3,
-    bg: 'linear-gradient(135deg, #1a0505 0%, #7f1d1d 55%, #450a0a 100%)',
-    accent: '#f87171',
+    bg: 'linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 55%, #0f2340 100%)',
+    accent: '#c9a84c',
     icon: 'bi-broadcast',
     badge: 'Live Events & Programmes',
     title: 'Join Us Live from Anywhere in the World',
@@ -57,7 +57,7 @@ const SLIDES = [
   },
   {
     id: 4,
-    bg: 'linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 40%, #2a1a0a 100%)',
+    bg: 'linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 55%, #0f2340 100%)',
     accent: '#c9a84c',
     icon: 'bi-heart-fill',
     badge: 'Support the Ministry',
@@ -165,9 +165,7 @@ export default function HeroCarousel({ onDonate }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}>
-              <motion.i className={`bi ${slide.icon}`}
-                animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.2, 1] }}
-                transition={{ duration: 3, repeat: Infinity, repeatDelay: 3 }} />
+              <i className={`bi ${slide.icon}`} />
               <span className="fw-bold small">{slide.badge}</span>
             </motion.div>
 
