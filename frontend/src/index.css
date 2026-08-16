@@ -7,7 +7,7 @@
 .container-lg,
 .container-xl,
 .container-xxl {
-  max-width: 1400px !important;
+  max-width: 1240px !important;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
@@ -37,7 +37,7 @@ h1, h2, h3, h4, .font-display { font-family: 'Cinzel', serif; }
 
 /* ── Hero (used on inner pages; Home uses HeroCarousel) ── */
 .hero-section {
-  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--deep-blue) 60%, #2a1a0a 100%);
+  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--deep-blue) 100%);
   min-height: 70vh;
   display: flex;
   align-items: center;
@@ -101,6 +101,32 @@ h1, h2, h3, h4, .font-display { font-family: 'Cinzel', serif; }
 .btn-gold:hover { opacity: .88; transform: translateY(-1px); color: var(--dark-navy); }
 .btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; border-radius: 8px; transition: all .2s; }
 .btn-outline-gold:hover { background: var(--gold); color: var(--dark-navy); }
+
+/* ── Chips: restrained, editorial tags (replaces loud Bootstrap badges) ── */
+.chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(13,27,42,.05);
+  color: var(--deep-blue);
+  border: 1px solid rgba(13,27,42,.10);
+}
+.chip-gold { background: rgba(201,168,76,.14); color: #8a6d1f; border-color: rgba(201,168,76,.35); }
+.chip-navy { background: rgba(13,27,42,.06); color: var(--dark-navy); border-color: rgba(13,27,42,.12); }
+.chip-live { background: rgba(190,42,42,.10); color: #be2a2a; border-color: rgba(190,42,42,.30); }
+
+/* Icon-led platform tag — brand is shown by the icon, not a loud fill */
+.platform-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.72rem; font-weight: 600;
+  padding: 3px 9px; border-radius: 6px;
+  background: rgba(13,27,42,.05); color: var(--deep-blue);
+  border: 1px solid rgba(13,27,42,.10);
+}
 
 /* ── Progress ── */
 .course-progress .progress { height: 10px; border-radius: 10px; }

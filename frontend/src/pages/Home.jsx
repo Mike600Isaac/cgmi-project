@@ -32,10 +32,10 @@ export default function Home() {
       <HeroCarousel onDonate={() => setShowDonation(true)} />
 
       {/* ── Scripture verse banner ── */}
-      <section style={{ background: 'var(--gold)', padding: '20px 0' }}>
+      <section style={{ background: 'var(--section-bg)', padding: '30px 0', borderBottom: '1px solid rgba(13,27,42,0.06)' }}>
         <div className="container text-center">
-          <p className="mb-0 fw-bold" style={{ color: 'var(--dark-navy)', fontFamily: 'Cinzel, serif' }}>
-            <i className="bi bi-quote me-2" />
+          <i className="bi bi-quote text-gold d-block mb-1" style={{ fontSize: '1.5rem', lineHeight: 1 }} />
+          <p className="mb-0 fst-italic" style={{ color: 'var(--deep-blue)', fontFamily: 'Cinzel, serif', fontSize: '1.05rem', maxWidth: 760, margin: '0 auto' }}>
             {verse.body || '"Go therefore and make disciples of all nations..." — Matthew 28:19'}
           </p>
         </div>
@@ -47,12 +47,12 @@ export default function Home() {
           {[...Array(3)].map((_, gi) => (
             <span key={gi} className="give-ticker-group">
               {[
-                '❤️ Support the Ministry',
-                '🙏 Your giving changes lives',
-                '🌍 Help us reach the nations',
-                '📖 Fund Gospel outreach',
-                '✨ Give and it shall be given unto you',
-                '🕊️ Be a blessing today',
+                'Support the Ministry',
+                'Your giving changes lives',
+                'Help us reach the nations',
+                'Fund Gospel outreach',
+                'Give and it shall be given unto you',
+                'Be a blessing today',
               ].map((msg, i) => (
                 <span key={i} className="give-ticker-item">
                   {msg}
@@ -125,9 +125,9 @@ export default function Home() {
           </AnimatedSection>
           <StaggerContainer className="row g-4">
             {[
-              { category: 'convert', icon: 'bi-star-fill', badge: 'Free', badgeClass: 'bg-success', title: 'Convert Class', text: 'Begin your journey with Christ. This course lays the solid foundation every new believer needs.' },
-              { category: 'missionary', icon: 'bi-globe2', badge: 'Paid', badgeClass: 'bg-primary', title: 'Missionary Training', text: 'Equip yourself to take the Gospel to the nations with power, strategy and fire.' },
-              { category: 'discipleship', icon: 'bi-people-fill', badge: 'Enrollment', badgeClass: 'bg-purple', title: 'Sons & Daughters', text: 'Deep discipleship and mentorship for those hungry for more of God.' },
+              { category: 'convert', icon: 'bi-star-fill', badge: 'Free', badgeClass: 'chip chip-gold', title: 'Convert Class', text: 'Begin your journey with Christ. This course lays the solid foundation every new believer needs.' },
+              { category: 'missionary', icon: 'bi-globe2', badge: 'Paid', badgeClass: 'chip chip-navy', title: 'Missionary Training', text: 'Equip yourself to take the Gospel to the nations with power, strategy and fire.' },
+              { category: 'discipleship', icon: 'bi-people-fill', badge: 'Enrollment', badgeClass: 'chip', title: 'Sons & Daughters', text: 'Deep discipleship and mentorship for those hungry for more of God.' },
             ].map((item, i) => (
               <StaggerItem key={i} className="col-md-4">
                 <motion.div
@@ -138,7 +138,7 @@ export default function Home() {
                   <PopIn delay={i * 0.1}>
                     <i className={`bi ${item.icon} text-gold fs-1 mb-3`} />
                   </PopIn>
-                  <span className={`badge ${item.badgeClass} mb-2`}>{item.badge}</span>
+                  <span className={`${item.badgeClass} mb-2`}>{item.badge}</span>
                   <h4 className="fw-bold mb-2">{item.title}</h4>
                   <p className="text-muted mb-4">{item.text}</p>
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
@@ -209,7 +209,7 @@ export default function Home() {
 
       {/* ── Events Section ── */}
       {(liveEvents.length > 0 || upcomingEvents.length > 0) && (
-        <section className="section-pad" style={{ background: 'linear-gradient(135deg, var(--dark-navy), #1a0a2e)' }}>
+        <section className="section-pad" style={{ background: 'linear-gradient(135deg, var(--dark-navy), var(--deep-blue))' }}>
           <div className="container">
             <AnimatedSection className="text-center mb-5">
               <div className="gold-divider" />
@@ -237,30 +237,25 @@ export default function Home() {
                   training: 'bi-journal-bookmark', worship: 'bi-music-note-beamed',
                   crusade: 'bi-fire', general: 'bi-calendar-event',
                 };
-                const TYPE_COLORS = {
-                  conference: '#7c3aed', prayer: '#4a90d9', outreach: '#059669',
-                  training: '#c9a84c', worship: '#db2777', crusade: '#dc2626', general: '#6b7280',
-                };
-                const color = TYPE_COLORS[e.event_type] || '#6b7280';
-                const icon  = TYPE_ICONS[e.event_type]  || 'bi-calendar-event';
+                const icon = TYPE_ICONS[e.event_type] || 'bi-calendar-event';
                 return (
                   <StaggerItem key={e.id} className="col-md-4">
                     <motion.div
                       className="ministry-card h-100 overflow-hidden"
                       whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(0,0,0,0.25)' }}
                       transition={{ type: 'spring', stiffness: 280 }}
-                      style={e.is_live_now ? { border: `2px solid #dc2626` } : { borderTop: `4px solid ${color}` }}>
+                      style={e.is_live_now ? { borderTop: '3px solid #be2a2a' } : { borderTop: '3px solid var(--gold)' }}>
                       <div className="p-4">
                         <div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                          <span className="badge" style={{ background: color }}>
+                          <span className="chip chip-navy">
                             <i className={`bi ${icon} me-1`} />{e.event_type}
                           </span>
                           {e.is_live_now
-                            ? <motion.span className="badge bg-danger"
-                                animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 1, repeat: Infinity }}>
+                            ? <motion.span className="chip chip-live"
+                                animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 1.2, repeat: Infinity }}>
                                 ● LIVE
                               </motion.span>
-                            : <span className="badge" style={{ background: 'rgba(255,255,255,0.1)', color: '#93c5fd' }}>Upcoming</span>}
+                            : <span className="chip chip-gold">Upcoming</span>}
                         </div>
                         <h5 className="fw-bold text-dark mb-1">{e.title}</h5>
                         {e.description && (
@@ -270,11 +265,11 @@ export default function Home() {
                           <i className="bi bi-calendar3 me-1" />
                           {new Date(e.start_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </p>
-                        <div className="d-flex gap-1 flex-wrap">
-                          {e.youtube_url  && <span className="badge" style={{ background: '#dc2626' }}><i className="bi bi-youtube me-1" />YT</span>}
-                          {e.jitsi_room   && <span className="badge" style={{ background: 'var(--gold)', color: '#000' }}><i className="bi bi-camera-video-fill me-1" />Jitsi</span>}
-                          {e.facebook_url && <span className="badge" style={{ background: '#1877f2' }}><i className="bi bi-facebook me-1" />FB</span>}
-                          {e.twitter_url  && <span className="badge bg-dark"><i className="bi bi-twitter-x me-1" />X</span>}
+                        <div className="d-flex gap-2 flex-wrap">
+                          {e.youtube_url  && <span className="platform-tag"><i className="bi bi-youtube" />YouTube</span>}
+                          {e.jitsi_room   && <span className="platform-tag"><i className="bi bi-camera-video-fill" />Jitsi</span>}
+                          {e.facebook_url && <span className="platform-tag"><i className="bi bi-facebook" />Facebook</span>}
+                          {e.twitter_url  && <span className="platform-tag"><i className="bi bi-twitter-x" />X</span>}
                         </div>
                       </div>
                       <div className="p-3 pt-0">
@@ -304,11 +299,7 @@ export default function Home() {
       <section className="section-pad text-white text-center" style={{ background: 'linear-gradient(135deg, var(--dark-navy), var(--deep-blue))' }}>
         <div className="container">
           <AnimatedSection>
-            <motion.i
-              className="bi bi-heart-fill text-gold fs-1 mb-3 d-inline-block"
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            />
+            <i className="bi bi-heart-fill text-gold fs-1 mb-3 d-inline-block" />
             <h2 className="display-6 fw-bold mb-3">Support the Ministry</h2>
             <p className="lead mb-4 mx-auto" style={{ maxWidth: '560px', color: 'rgba(255,255,255,0.8)' }}>
               Your generous donations help us reach more souls, produce more content and expand God's kingdom.
